@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analog Clock</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    
+    <h2>clock</h2>
+    <div class="clock">
+        <div id="hour"></div>
+        <div id="minute"></div>
+        <div id="second"></div>
+        <span id="digitalClock"></span>
+    </div>
+
+
+    <script>
+        
+
+        const hrs = document.getElementById("hour");
+        const min = document.getElementById("minute");
+        const sec = document.getElementById("second");
+
+        function displayTime(){
+            var time = new Date();
+            var hour = time.getHours();
+            var minute = time.getMinutes();
+            var second = time.getSeconds();
+            
+            
+            
+            const hourDeg = (hour * 30) + (minute  * 0.5) // every 60min, 30Deg 30/60 = 0.5 per minute
+            const minuteDeg = (minute * 6) + (second  * 0.1) // every 60sec, 6Deg 6/60 = 0.1 per second
+            const secondDeg = (second * 6)  
+
+            
+            
+            hrs.style.transform = `rotateZ(${hourDeg}deg)`;
+            min.style.transform = `rotateZ(${minuteDeg}deg)`;
+            sec.style.transform = `rotateZ(${secondDeg}deg)`;
+
+            
+
+            if (hour > 12) {
+                hour = hour - 12;
+            }
+            if (hour < 10) {
+                hour  = '0' + hour;
+            }
+            
+            
+            if (minute < 10) {
+                minute  = '0' + minute;
+            }
+            
+            if (second < 10) {
+                second  = '0' + second;
+            }
+
+            
+            
+            document.getElementById("digitalClock").innerHTML = hour + " : " + minute + " : " + second;
+
+        }
+        
+        displayTime();
+
+        setInterval(displayTime,1000);
+        </script>
+
+
+</body>
+</html>
